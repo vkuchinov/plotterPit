@@ -17,8 +17,8 @@ http://shiffman.net/2011/02/03/rotate-a-vector-processing-js/
 
 import processing.pdf.*;
 
-int M = 128;               //latitude # of segments
-int N = 128;               //longtitude # of segments
+int M = 256;               //latitude # of segments
+int N = 256;               //longtitude # of segments
 float scale = 250.0;       //scale factor
 
 //arbitary axis
