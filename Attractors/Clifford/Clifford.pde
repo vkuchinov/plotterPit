@@ -1,67 +1,77 @@
 /*
 
-GINGERBREAD MAN
+ClIFFORD ATTRACTOR [also known as PICKOVER ATTRACTOR]
+by Clifford A. Pickover
+
 a chaotic two-dimensional piecewise linear map defined by
 
-  Xn+1 = 1.0 - Yn + |Xn|
-  Yn+1 = Xn;
+  xn+1 = sin(a * yn) + c * cos(a * xn)
+  yn+1 = sin(b * xn) + d * cos(b * yn)
+
+  a = 1.7, b = 1.7, c = 0.6, d = 1.2  //test values
+  
+PROBLEMS TO SOLVE:
+[-] There are some parazite points in the bottom-left.
+[-] Have to sort all point to make aesthetically good-looking
+    vector visual.
 
 REFERENCES:
-http://mathworld.wolfram.com/GingerbreadmanMap.html
+https://en.wikipedia.org/wiki/Clifford_A._Pickover
 http://rosettacode.org/wiki/Map_range
-
 
 @author Vladimir V. KUCHINOV
 @email  helloworld@vkuchinov.co.uk
 
-
- for(var i = 0; i < 100; i++){
-      var x = Math.random()*5;
-      var y = Math.random()*5;
-      var xOld;
-      for(var j = 0; j < 2000; j++) {
-        xOld = x;
-        x = 1 - y + Math.abs(x);
-        y = xOld;
-        ctx.fillRect((x+4)*35, (y+4)*35, 1, 1);
-      }
-    }
-  }
-  
 */
+import processing.pdf.*;
 
-float scale = 16.0;
-
+float a, b, c, d;
+float scale = 150.0;
 float xn, yn;
+
+ArrayList<PVector> points = new ArrayList<PVector>();
 
 void setup(){
   
- size(400, 400);
- translate(width * 0.32, height * 0.32);
+ size(800, 800);
+ 
+   a = 1.7; b = 1.7; c = 0.6; d = 1.2;
    
-   for(int j = 0; j < 99; j++){
+   for(int j = 0; j < 64; j++){
      
-   float x = random(-2, 8);
-   float y = random(-2, 8);
-   println(x);
+   float x = random(-3, 3);
+   float y = random(-3, 3);
    
-       for(int i = 0; i < 2048; i++ ){
+       for(int i = 0; i < 1024; i++ ){
         
            xn = x;
+           yn = y;
            
-           x = 1.0 - y + Math.abs(x);
-           y = xn;
+           x = sin(a * yn) + c * cos(a * xn);
+           y = sin(b * xn) + d * cos(b * yn);
            
-           stroke(0);
-           strokeWeight(0.75);
-           point(x * scale, y * scale);     
+           //stroke(0);
+           //strokeWeight(0.75);
+           points.add(new PVector(1.25 * x * scale, -y * scale));     
            
        }
    }
   
   //filter(BLUR, 4);
   //filter(POSTERIZE, 4);
+
+  beginRecord(PDF, "output.pdf");
+  translate(width * 0.5, height * 0.5);
   
-  //feel free too play with post-fx for a better artistic result
-   
+  noFill();
+  stroke(0);
+  strokeWeight(0.1);
+  
+  beginShape();
+  for(int p = 0; p < points.size(); p++){
+      vertex(points.get(p).x, points.get(p).y); 
+  }
+  endShape();
+  endRecord();
+    
 }
