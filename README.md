@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-some little sketches for flatbed plotter
+<h1>The PlotterPit</h1><br>
+<i>some little sketches for flatbed plotter</i>
 
 /pseudo3DSphere : creates segmented pseudo 3D sphere [ Processing 2.x ]
-
-# plotterPit
-some little sketches for flatbed plotter
-
-/pseudo3DSphere : creates segmented pseudo 3D sphere [ Processing 2.x ] 
-
