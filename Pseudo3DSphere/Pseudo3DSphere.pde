@@ -89,3 +89,21 @@ PVector rotate3D(PVector vert, float angle,PVector axis){
   return clone;
   
 }
+
+void rotateByX(PVector point_, float radians_) {
+   float y = point_.y;
+   point_.y = (y * cos(radians_)) + (point_.z * sin(radians_) * -1.0);
+   point_.z = (y * sin(radians_)) + (point_.z * cos(radians_));
+}
+
+void rotateByY(PVector point_, float radians_) {
+   float x = point_.x;
+   point_.x = (x * cos(radians_)) + (point_.z * sin(radians_) * -1.0);
+   point_.z = (x * sin(radians_)) + (point_.z * cos(radians_));
+}
+
+void rotateByZ(PVector point_, float radians_) {
+   float x = point_.x;
+   point_.x = (x * cos(radians_)) + (point_.y * sin(radians_) * -1.0);
+   point_.y = (x * sin(radians_)) + (point_.y * cos(radians_));
+}
